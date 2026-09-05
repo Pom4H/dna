@@ -1,5 +1,5 @@
 import { derive, type Dependencies, type Inputs, type Value } from "./definitions.ts";
-import { artifact, type Artifact, type ArtifactOptions } from "./artifacts.ts";
+import { artifact, type ArtifactKind, type ArtifactOptions } from "./artifacts.ts";
 import { s } from "./schema.ts";
 
 export interface SemanticValue<T, K extends string> {
@@ -36,8 +36,8 @@ export function claim<const D extends Dependencies>(id: string, options: {
     value: derive(`${id}.text`, s.string({ minLength: 1 }), options.dependencies, options.text) });
 }
 
-export function publication<const D extends Dependencies>(id: string,
-  options: ArtifactOptions<D> & { readonly claims: readonly Claim[] }): Artifact {
+export function publication<const T extends ArtifactKind, const D extends Dependencies>(id: string,
+  options: ArtifactOptions<T, D> & { readonly claims: readonly Claim[] }) {
   if (options.claims.length === 0) throw new Error(`${id}: publication requires at least one claim`);
   const dependencies = Object.values(options.dependencies);
   for (const item of options.claims) {
