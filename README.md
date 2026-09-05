@@ -40,7 +40,7 @@ There are **14 exported scenarios and 17 surface definitions** across these exam
 
 Read the [cross-domain findings](docs/cross-domain-findings.md) before extending the protocol.
 
-The [business evolution experiment](docs/business-evolution.md) explores fictional company policies over multiple periods: sales versus service, channels, payment terms, quality, support and cash reserves. Run `bun run evolve:business` to compare evolution, equal-budget random search and full enumeration, with separate evaluation scenarios and immutable accepted contracts. This tests a simulator and its intervention vocabulary; it does not validate a real business.
+The [business evolution experiment](docs/business-evolution.md) explores fictional company policies over multiple periods: sales versus service, channels, payment terms, quality, support and cash reserves. Run `bun run evolve:business` to compare evolution, equal-budget random search and full enumeration, with separate evaluation scenarios and immutable accepted contracts. This tests a simulator and its intervention vocabulary; it does not validate a real business. The [conclusions](docs/business-evolution-conclusions.md) describe the evidence, tradeoffs and proposed division of work between DNA, search, agents and durable execution.
 
 ## A change that must not propagate everywhere
 

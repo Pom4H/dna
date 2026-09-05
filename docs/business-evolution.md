@@ -1,5 +1,7 @@
 # Business evolution experiment
 
+Read [conclusions and the proposed next steps](business-evolution-conclusions.md) for the implications for DNA, agents and durable execution.
+
 This is a fictional market laboratory, not empirical validation or financial advice. Run `bun run evolve:business` with Bun 1.4.2. Full candidate genomes, parent IDs and fitness are written to `reports/business-evolution/full.json`; compact results go to `summary.json`.
 
 The experiment evolves a company's commercial and operating policy: channel, purchase versus service, entry price, recurring price, deposit, installation hours, component, support and (since v2) cash reserve before accepting new installations. Every candidate competes with three fictional rival policies for the same buyers, monthly kit stock and installer hours. Rival policies are fixed; their cash, customers and reputation change. This is not an equilibrium or coevolution of all players.
