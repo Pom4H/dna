@@ -1,0 +1,43 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+      - name: Verify runtime
+        run: |
+          test "$(bun --version)" = "$(cat .bun-version)"
+          bun --version
+      - name: Install pinned development tools
+        run: bun install --ignore-scripts
+      - name: Show compiler version
+        run: bun run typecheck --version
+      - name: Typecheck, tests, ESM build, CLI and IR
+        run: bun run verify
+      - name: Coverage
+        run: bun run test:coverage
+      - name: Bootstrap lockfile for review
+        if: always()
+        run: cat bun.lock
+      - name: Keep reports and resolved lockfile
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dna-verification
+          path: |
+            reports/
+            bun.lock
+          if-no-files-found: warn

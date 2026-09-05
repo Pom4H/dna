@@ -1,0 +1,29 @@
+{
+  "name": "@pom4h/dna",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Executable domain models, explicit evidence, and hypothesis tests in TypeScript.",
+  "type": "module",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/Pom4H/dna.git" },
+  "packageManager": "bun@1.4.2",
+  "engines": { "bun": "1.4.2" },
+  "exports": {
+    ".": "./src/index.ts",
+    "./usb": "./src/domains/usb.ts",
+    "./access": "./src/domains/access.ts",
+    "./commerce": "./src/domains/commerce.ts"
+  },
+  "bin": { "dna": "./src/cli.ts" },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "build": "tsc -p tsconfig.build.json",
+    "demo": "bun examples/demo.ts",
+    "check:model": "bun src/cli.ts examples/subscription.ts",
+    "ir": "bun scripts/export-ir.ts",
+    "verify": "bun run typecheck && bun test && bun run build && bun run scripts/smoke.ts && bun run check:model && bun run ir"
+  },
+  "devDependencies": { "@types/node": "24.0.4", "typescript": "7.0.2" }
+}
