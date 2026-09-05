@@ -10,11 +10,11 @@ export function snapshot<T>(url: URL, schema: Schema<T>) {
   const bytes = readFileSync(url, "utf8");
   const digest = createHash("sha256").update(bytes).digest("hex");
   const data = schema.parse(JSON.parse(bytes), url.pathname);
-  return Object.freeze({
-    data,
-    digest,
+  // Stable fixture name, not a machine-specific checkout path, in provenance.
+  const source = url.pathname.split("/").at(-1) ?? "snapshot";
+  return Object.freeze({ data, digest,
     input<V>(value: V, section: string): Assertion<V> {
-      return assumption(value, `SYNTHETIC snapshot ${url.pathname}#${section}; sha256:${digest}`);
+      return assumption(value, `SYNTHETIC snapshot ${source}#${section}; sha256:${digest}`);
     },
   });
 }

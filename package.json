@@ -2,7 +2,7 @@
   "name": "@pom4h/dna",
   "version": "0.1.0",
   "private": true,
-  "description": "Executable domain models, explicit evidence, and hypothesis tests in TypeScript.",
+  "description": "Experimental source-backed business models, counterexamples and public contracts in TypeScript.",
   "type": "module",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/Pom4H/dna.git" },
@@ -22,9 +22,11 @@
     "test:coverage": "bun test --coverage",
     "build": "tsc -p tsconfig.build.json",
     "demo": "bun examples/demo.ts",
+    "domains": "bun scripts/stress-domains.ts",
+    "test:domains": "bun test tests/cross-domain.test.ts tests/snapshot-adapter.test.ts tests/known-gaps.test.ts tests/contract-regressions.test.ts",
     "check:model": "bun src/cli.ts examples/subscription.ts",
     "ir": "bun scripts/export-ir.ts",
-    "verify": "bun run typecheck && bun test && bun run build && bun run scripts/smoke.ts && bun run check:model && bun run ir"
+    "verify": "bun run typecheck && bun test && bun run build && bun run scripts/smoke.ts && bun run check:model && bun run ir && bun run domains"
   },
   "devDependencies": { "@types/node": "24.0.4", "typescript": "7.0.2" }
 }
