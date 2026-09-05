@@ -8,4 +8,4 @@ export { contract, contractSchema, semanticDiff, discovery, discoverySchema,
   type DnaContract, type DnaDiscovery, type PublicEntity, type PublicCapability,
   type PublicClaim, type PublicRelation, type SemanticChange } from "./contract.ts";
 export { model, Model, Scenario, Report, type ModelOptions, type AssertOptions, type Basis,
-  type ValueResult, type CheckResult, type Origin } from "./model.ts";
+  type ValueResult, type CheckResult, type Origin, type ScenarioWriter } from "./model.ts";

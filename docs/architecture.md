@@ -20,6 +20,8 @@ Entity `version` labels the vocabulary/schema version. Hardware revision or comm
 
 A `set` is an explicit replacement within a new immutable scenario. Fork before replacing a disputed value to preserve both interpretations. This is snapshot branching, not a persistent event store or an approval workflow.
 
+Use `scenario.batch(draft => { ... })` when ingesting many facts into one snapshot. It validates each `set`/`record` with the same ownership, schema and `NoInfer` contracts while copying the records only once for the batch, then constructing the immutable result. The synchronous writer expires when the callback returns or throws; exceptions publish no partial scenario. This avoids the quadratic copying cost of thousands of sequential immutable writes. It does not batch external transactions or cache evaluations across snapshots.
+
 ## Two different CI gates
 
 The default gate asks whether all declared checks pass in the modeled scenario. A `conditional` hypothesis may pass this gate: its assumptions are visible and can be stress-tested.

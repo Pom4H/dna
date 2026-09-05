@@ -124,6 +124,10 @@ export class Model {
 export function model(options: ModelOptions): Model { return new Model(options); }
 
 type Records = ReadonlyMap<string, readonly Assertion<unknown>[]>;
+export interface ScenarioWriter {
+  set<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): void;
+  record<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): void;
+}
 class Evaluation {
   #cache = new Map<string, ValueResult>();
   constructor(readonly records: Records) {}
@@ -217,6 +221,27 @@ export class Scenario {
   }
   set<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): Scenario { return this.#write(node, assertion, false); }
   record<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): Scenario { return this.#write(node, assertion, true); }
+  /** Validate many inputs with one records copy. The writer is synchronous and
+   * expires before the new immutable snapshot is returned. */
+  batch(write: (draft: ScenarioWriter) => undefined): Scenario {
+    const records = new Map(this.#records);
+    let open = true;
+    const put = <T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>, append: boolean) => {
+      if (!open) throw new Error("Scenario batch writer is closed");
+      this.model.owns(node);
+      if (node.kind !== "fact") throw new Error(`Only facts can receive assertions: ${node.id}`);
+      const validated = validateAssertion(node, assertion);
+      records.set(node.id, Object.freeze([...(append ? records.get(node.id) ?? [] : []), validated]));
+    };
+    const draft: ScenarioWriter = Object.freeze({
+      set: <T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>) => put(node, assertion, false),
+      record: <T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>) => put(node, assertion, true),
+    });
+    try {
+      if (write(draft) !== undefined) throw new Error("Scenario batch callback must be synchronous and return undefined");
+    } finally { open = false; }
+    return new Scenario(this.model, this.name, records);
+  }
   fork(name: string): Scenario { return new Scenario(this.model, name, this.#records); }
   read<T>(node: Value<T>): ValueResult<T> { this.model.owns(node); return new Evaluation(this.#records).read(node); }
   evaluate(): Report {
