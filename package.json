@@ -23,10 +23,12 @@
     "build": "tsc -p tsconfig.build.json",
     "demo": "bun examples/demo.ts",
     "domains": "bun scripts/stress-domains.ts",
+    "finance": "bun scripts/stress-finance.ts",
+    "test:finance": "bun test tests/finance-strategy.test.ts",
     "test:domains": "bun test tests/cross-domain.test.ts tests/snapshot-adapter.test.ts tests/known-gaps.test.ts tests/contract-regressions.test.ts",
     "check:model": "bun src/cli.ts examples/subscription.ts",
     "ir": "bun scripts/export-ir.ts",
-    "verify": "bun run typecheck && bun test && bun run build && bun run scripts/smoke.ts && bun run check:model && bun run ir && bun run domains"
+    "verify": "bun run typecheck && bun test && bun run build && bun run scripts/smoke.ts && bun run check:model && bun run ir && bun run domains && bun run finance"
   },
   "devDependencies": { "@types/node": "24.0.4", "typescript": "7.0.2" }
 }
