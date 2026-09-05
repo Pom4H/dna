@@ -1,14 +1,53 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { baselineGenome, simulateMarket, acceptContract, assess, trainingMarkets } from "../examples/business-evolution/model.ts";
-import { search, runExperiment } from "../examples/business-evolution/search.ts";
+import { allGenomes, fingerprint, search, runExperiment } from "../examples/business-evolution/search.ts";
+
+const growthCounterexample = { ...baselineGenome, channel: "partner" as const, payment: "service" as const,
+  entryPriceCents: 360_000, monthlyCents: 36_000, depositPercent: 0, installationHours: 6,
+  component: "rugged" as const, support: "lean" as const };
+const growthMarket = { ...trainingMarkets[4]!, id: "observed-synthetic-failure-1103", seed: 1103 };
+
+test("growth counterexample: positive final cash does not repair an earlier liquidity failure", () => {
+  const result = simulateMarket(growthCounterexample, growthMarket).focal;
+  assert.ok(result.netCashCents > 0);
+  assert.ok(result.minimumCashCents < 0);
+  assert.equal(assess(growthCounterexample, [result]).feasible, false);
+});
+
+test("a cash-reserve intervention rejects new growth before it consumes operating cash", () => {
+  const guarded = { ...growthCounterexample, cashReserveMonths: 3 };
+  const result = simulateMarket(guarded, growthMarket).focal;
+  assert.ok(result.minimumCashCents >= 0);
+  assert.ok(result.fundingRejected > 0);
+  assert.ok(result.netCashCents > 0);
+  assert.equal(assess(guarded, [result]).feasible, true);
+});
+
+test("finite search space contains exactly 6912 distinct valid policies, including baseline", () => {
+  const genomes = allGenomes();
+  assert.equal(genomes.length, 6912);
+  assert.equal(new Set(genomes.map(fingerprint)).size, 6912);
+  assert.ok(genomes.some(genome => fingerprint(genome) === fingerprint(baselineGenome)));
+});
 
 test("evolution counterexample: profitable shortcuts cannot erase delivery requirements", () => {
-  const shortcut = { ...baselineGenome, installationHours: 4 };
+  const shortcut = { ...growthCounterexample, installationHours: 4, cashReserveMonths: 3 };
   const results = trainingMarkets.map(market => simulateMarket(shortcut, market).focal);
   const evaluation = assess(shortcut, results);
+  assert.ok(evaluation.meanNetCashCents! > 0);
   assert.equal(evaluation.feasible, false);
   assert.equal(evaluation.decisions.find(check => check.id === "evolution.quality")?.status, "fail");
+});
+
+test("fitness cannot hide unfinished obligations behind a large final cash balance", () => {
+  const outcome = simulateMarket(baselineGenome, trainingMarkets[0]!).focal;
+  const result = assess(baselineGenome, [{ ...outcome, minimumCashCents: 1_000_000,
+    netCashCents: 20_000_000, openObligations: 1 }]);
+  assert.ok(result.scoreCents! > 0);
+  assert.equal(result.feasible, false);
+  assert.equal(result.decisions.find(check => check.id === "evolution.obligations")?.status, "fail");
+  assert.ok(result.decisions.every(check => check.basis === "assumptions"));
 });
 
 test("evolution counterexample: annual subscription income cannot pay today's hardware bill", () => {

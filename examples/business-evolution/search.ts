@@ -7,6 +7,7 @@ export const genes = {
   entryPriceCents: [180_000, 240_000, 300_000, 360_000], monthlyCents: [12_000, 15_000, 24_000, 36_000],
   depositPercent: [0, 50, 100], installationHours: [4, 6, 8],
   component: ["standard", "rugged"], support: ["lean", "staffed"],
+  cashReserveMonths: [0, 1, 3],
 } as const;
 type Gene = keyof typeof genes;
 const keys = Object.keys(genes) as Gene[];
@@ -19,6 +20,27 @@ function rank(a: Candidate, b: Candidate) {
 }
 export function evaluate(genome: Genome, markets: readonly Market[]) {
   return assess(genome, markets.map(market => simulateMarket(genome, market).focal));
+}
+
+export function allGenomes(): Genome[] {
+  let combinations: Record<string, string | number>[] = [{}];
+  for (const key of keys) combinations = combinations.flatMap(combination =>
+    genes[key].map(value => ({ ...combination, [key]: value })));
+  return combinations.map(combination => genomeSchema.parse(combination));
+}
+export function exhaustiveSearch(markets: readonly Market[]) {
+  if (markets.length === 0) throw new Error("Cannot certify an empty training set");
+  const genomes = allGenomes();
+  let winner: Candidate | undefined;
+  let feasibleCount = 0;
+  for (const [i, genome] of genomes.entries()) {
+    const assessment = evaluate(genome, markets);
+    const candidate: Candidate = { id: `enumeration-${i}`, genome, assessment, parents: [], origin: "random" };
+    feasibleCount += Number(assessment.feasible);
+    if (!winner || rank(candidate, winner) < 0) winner = candidate;
+  }
+  return { evaluations: genomes.length, simulations: genomes.length * markets.length, feasibleCount, winner: winner!,
+    scope: "Exact best within this finite gene grid, these training worlds and this fixed objective only" };
 }
 
 export function search(method: "evolution" | "random", options: SearchOptions) {
@@ -81,7 +103,7 @@ export function search(method: "evolution" | "random", options: SearchOptions) {
 }
 
 export function runExperiment(options: { seeds?: readonly number[]; population?: number; generations?: number;
-  markets?: readonly Market[]; holdout?: readonly Market[] } = {}) {
+  markets?: readonly Market[]; holdout?: readonly Market[]; onRun?: (seed: number) => void } = {}) {
   const seeds = options.seeds ?? [17, 37, 73];
   if (seeds.length === 0) throw new Error("At least one search seed is required");
   const markets = options.markets ?? trainingMarkets;
@@ -95,9 +117,11 @@ export function runExperiment(options: { seeds?: readonly number[]; population?:
     const complete = (result: ReturnType<typeof search>) => ({ ...result,
       holdout: evaluate(result.winner.genome, holdout),
       stress: stressMarkets.map(market => ({ market: market.id, ...evaluate(result.winner.genome, [market]) })) });
-    return { seed, evolution: complete(evolutionary), random: complete(random) };
+    const completed = { seed, evolution: complete(evolutionary), random: complete(random) };
+    options.onRun?.(seed);
+    return completed;
   });
-  return { format: "dna.business-evolution/v0.1", evidence: "synthetic-assumptions", population, generations, seeds,
+  return { format: "dna.business-evolution/v0.2", evidence: "synthetic-assumptions", population, generations, seeds,
     horizon: { acquisitionMonths: 12, runoffMonths: 12, contractMonths: 12 },
     objective: "Feasibility first, then 0.5 * mean net cash + 0.5 * worst net cash on training worlds",
     scope: "Fictional alternative company strategies, each in a separate shared-resource market with three fixed rival policies",

@@ -1,0 +1,1019 @@
+{
+  "format": "dna.business-evolution/v0.2",
+  "evidence": "synthetic-assumptions",
+  "execution": {
+    "elapsedSeconds": 146.90190762500004,
+    "runtime": "Bun 1.4.0",
+    "baseRevision": "ef28cf2a5f6f687686486ed940972a3432b6d21b",
+    "sourceHashes": {
+      "examples/business-evolution/model.ts": "7deec15bb4f5ba7c5a8ef1271d0eb3423465ea53464c1d79c010f31a7c4d4fb7",
+      "examples/business-evolution/search.ts": "af7d6c28e146122ae3e39a5b06ec1bc695bd5f1e73f5d6a76f3b5dd4101393d8",
+      "scripts/evolve-business.ts": "94abb9e4bd29639e3f2842227c12637be69968706026649858204673c32dc01c"
+    },
+    "workingTree": "M examples/business-evolution/model.ts\n M examples/business-evolution/search.ts\n M scripts/evolve-business.ts\n M tests/business-evolution.test.ts\n?? examples/harness-experiment/\n?? tests/harness-dna.test.ts\n?? tests/harness-experiment.test.ts\n?? tests/harness-plain.test.ts"
+  },
+  "population": 96,
+  "generations": 12,
+  "seeds": [
+    17,
+    37,
+    73
+  ],
+  "objective": "Feasibility first, then 0.5 * mean net cash + 0.5 * worst net cash on training worlds",
+  "trainingSeeds": [
+    101,
+    211,
+    307,
+    401,
+    503,
+    601,
+    1009,
+    1103
+  ],
+  "holdoutSeeds": [
+    2003,
+    2111,
+    2203,
+    2309,
+    2411,
+    2503
+  ],
+  "baseline": {
+    "genome": {
+      "cashReserveMonths": 0,
+      "channel": "direct",
+      "component": "standard",
+      "depositPercent": 50,
+      "entryPriceCents": 300000,
+      "installationHours": 8,
+      "monthlyCents": 15000,
+      "payment": "purchase",
+      "support": "staffed"
+    },
+    "training": {
+      "feasible": false,
+      "scoreCents": -6302375,
+      "meanNetCashCents": -5389750,
+      "worstNetCashCents": -7215000,
+      "minimumCashCents": -3215000,
+      "meanOrders": 9.125
+    },
+    "holdout": {
+      "feasible": false,
+      "scoreCents": -6410416,
+      "meanNetCashCents": -5369833,
+      "worstNetCashCents": -7451000,
+      "minimumCashCents": -3451000,
+      "meanOrders": 9
+    }
+  },
+  "runs": [
+    {
+      "method": "evolution",
+      "seed": 17,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 894,
+      "genome": {
+        "cashReserveMonths": 1,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "staffed"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8614580,
+        "meanNetCashCents": 9767080,
+        "worstNetCashCents": 7462080,
+        "minimumCashCents": 57760,
+        "meanOrders": 80.375
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 8325360,
+        "meanNetCashCents": 9611680,
+        "worstNetCashCents": 7039040,
+        "minimumCashCents": 232960,
+        "meanOrders": 78.33333333333333
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 2422400,
+          "meanNetCashCents": 2422400,
+          "worstNetCashCents": 2422400,
+          "minimumCashCents": 261360,
+          "meanOrders": 47
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 453920,
+          "meanNetCashCents": 453920,
+          "worstNetCashCents": 453920,
+          "minimumCashCents": 79680,
+          "meanOrders": 49
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -3641760,
+          "meanNetCashCents": -3641760,
+          "worstNetCashCents": -3641760,
+          "minimumCashCents": 358240,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -5652320,
+          "meanNetCashCents": -5652320,
+          "worstNetCashCents": -5652320,
+          "minimumCashCents": -3652320,
+          "meanOrders": 9
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 5432655
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 6897335
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8606850
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8614580
+        }
+      ]
+    },
+    {
+      "method": "random",
+      "seed": 17,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 1065,
+      "genome": {
+        "cashReserveMonths": 3,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "lean"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8471535,
+        "meanNetCashCents": 9257070,
+        "worstNetCashCents": 7686000,
+        "minimumCashCents": 674240,
+        "meanOrders": 75.25
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 7764714,
+        "meanNetCashCents": 9192387,
+        "worstNetCashCents": 6337040,
+        "minimumCashCents": 760240,
+        "meanOrders": 72
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 3259040,
+          "meanNetCashCents": 3259040,
+          "worstNetCashCents": 3259040,
+          "minimumCashCents": 1206560,
+          "meanOrders": 43
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 1681840,
+          "meanNetCashCents": 1681840,
+          "worstNetCashCents": 1681840,
+          "minimumCashCents": 650320,
+          "meanOrders": 50
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -2037200,
+          "meanNetCashCents": -2037200,
+          "worstNetCashCents": -2037200,
+          "minimumCashCents": 1962800,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -4255360,
+          "meanNetCashCents": -4255360,
+          "worstNetCashCents": -4255360,
+          "minimumCashCents": -2255360,
+          "meanOrders": 7
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 5432655
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 5432655
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8471535
+        }
+      ]
+    },
+    {
+      "method": "evolution",
+      "seed": 37,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 864,
+      "genome": {
+        "cashReserveMonths": 1,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "staffed"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8614580,
+        "meanNetCashCents": 9767080,
+        "worstNetCashCents": 7462080,
+        "minimumCashCents": 57760,
+        "meanOrders": 80.375
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 8325360,
+        "meanNetCashCents": 9611680,
+        "worstNetCashCents": 7039040,
+        "minimumCashCents": 232960,
+        "meanOrders": 78.33333333333333
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 2422400,
+          "meanNetCashCents": 2422400,
+          "worstNetCashCents": 2422400,
+          "minimumCashCents": 261360,
+          "meanOrders": 47
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 453920,
+          "meanNetCashCents": 453920,
+          "worstNetCashCents": 453920,
+          "minimumCashCents": 79680,
+          "meanOrders": 49
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -3641760,
+          "meanNetCashCents": -3641760,
+          "worstNetCashCents": -3641760,
+          "minimumCashCents": 358240,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -5652320,
+          "meanNetCashCents": -5652320,
+          "worstNetCashCents": -5652320,
+          "minimumCashCents": -3652320,
+          "meanOrders": 9
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 6072440
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8606850
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8606850
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8614580
+        }
+      ]
+    },
+    {
+      "method": "random",
+      "seed": 37,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 1063,
+      "genome": {
+        "cashReserveMonths": 3,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "lean"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8471535,
+        "meanNetCashCents": 9257070,
+        "worstNetCashCents": 7686000,
+        "minimumCashCents": 674240,
+        "meanOrders": 75.25
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 7764714,
+        "meanNetCashCents": 9192387,
+        "worstNetCashCents": 6337040,
+        "minimumCashCents": 760240,
+        "meanOrders": 72
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 3259040,
+          "meanNetCashCents": 3259040,
+          "worstNetCashCents": 3259040,
+          "minimumCashCents": 1206560,
+          "meanOrders": 43
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 1681840,
+          "meanNetCashCents": 1681840,
+          "worstNetCashCents": 1681840,
+          "minimumCashCents": 650320,
+          "meanOrders": 50
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -2037200,
+          "meanNetCashCents": -2037200,
+          "worstNetCashCents": -2037200,
+          "minimumCashCents": 1962800,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -4255360,
+          "meanNetCashCents": -4255360,
+          "worstNetCashCents": -4255360,
+          "minimumCashCents": -2255360,
+          "meanOrders": 7
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 6072440
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 8002525
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8471535
+        }
+      ]
+    },
+    {
+      "method": "evolution",
+      "seed": 73,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 915,
+      "genome": {
+        "cashReserveMonths": 1,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "staffed"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8614580,
+        "meanNetCashCents": 9767080,
+        "worstNetCashCents": 7462080,
+        "minimumCashCents": 57760,
+        "meanOrders": 80.375
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 8325360,
+        "meanNetCashCents": 9611680,
+        "worstNetCashCents": 7039040,
+        "minimumCashCents": 232960,
+        "meanOrders": 78.33333333333333
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 2422400,
+          "meanNetCashCents": 2422400,
+          "worstNetCashCents": 2422400,
+          "minimumCashCents": 261360,
+          "meanOrders": 47
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 453920,
+          "meanNetCashCents": 453920,
+          "worstNetCashCents": 453920,
+          "minimumCashCents": 79680,
+          "meanOrders": 49
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -3641760,
+          "meanNetCashCents": -3641760,
+          "worstNetCashCents": -3641760,
+          "minimumCashCents": 358240,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -5652320,
+          "meanNetCashCents": -5652320,
+          "worstNetCashCents": -5652320,
+          "minimumCashCents": -3652320,
+          "meanOrders": 9
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 5186895
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 7429375
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 8059900
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8085500
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8401445
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8449985
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8614580
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8614580
+        }
+      ]
+    },
+    {
+      "method": "random",
+      "seed": 73,
+      "evaluations": 1152,
+      "simulations": 9216,
+      "uniqueGenomes": 1062,
+      "genome": {
+        "cashReserveMonths": 3,
+        "channel": "partner",
+        "component": "rugged",
+        "depositPercent": 50,
+        "entryPriceCents": 360000,
+        "installationHours": 6,
+        "monthlyCents": 36000,
+        "payment": "service",
+        "support": "lean"
+      },
+      "training": {
+        "feasible": true,
+        "scoreCents": 8471535,
+        "meanNetCashCents": 9257070,
+        "worstNetCashCents": 7686000,
+        "minimumCashCents": 674240,
+        "meanOrders": 75.25
+      },
+      "holdout": {
+        "feasible": true,
+        "scoreCents": 7764714,
+        "meanNetCashCents": 9192387,
+        "worstNetCashCents": 6337040,
+        "minimumCashCents": 760240,
+        "meanOrders": 72
+      },
+      "stress": [
+        {
+          "market": "stress-price-war",
+          "feasible": true,
+          "scoreCents": 3259040,
+          "meanNetCashCents": 3259040,
+          "worstNetCashCents": 3259040,
+          "minimumCashCents": 1206560,
+          "meanOrders": 43
+        },
+        {
+          "market": "stress-supply",
+          "feasible": true,
+          "scoreCents": 1681840,
+          "meanNetCashCents": 1681840,
+          "worstNetCashCents": 1681840,
+          "minimumCashCents": 650320,
+          "meanOrders": 50
+        },
+        {
+          "market": "stress-demand",
+          "feasible": true,
+          "scoreCents": -2037200,
+          "meanNetCashCents": -2037200,
+          "worstNetCashCents": -2037200,
+          "minimumCashCents": 1962800,
+          "meanOrders": 18
+        },
+        {
+          "market": "stress-credit",
+          "feasible": false,
+          "scoreCents": -4255360,
+          "meanNetCashCents": -4255360,
+          "worstNetCashCents": -4255360,
+          "minimumCashCents": -2255360,
+          "meanOrders": 7
+        }
+      ],
+      "convergence": [
+        {
+          "generation": 0,
+          "evaluated": 96,
+          "feasible": true,
+          "scoreCents": 5186895
+        },
+        {
+          "generation": 1,
+          "evaluated": 192,
+          "feasible": true,
+          "scoreCents": 6128735
+        },
+        {
+          "generation": 2,
+          "evaluated": 288,
+          "feasible": true,
+          "scoreCents": 7161750
+        },
+        {
+          "generation": 3,
+          "evaluated": 384,
+          "feasible": true,
+          "scoreCents": 8173715
+        },
+        {
+          "generation": 4,
+          "evaluated": 480,
+          "feasible": true,
+          "scoreCents": 8173715
+        },
+        {
+          "generation": 5,
+          "evaluated": 576,
+          "feasible": true,
+          "scoreCents": 8173715
+        },
+        {
+          "generation": 6,
+          "evaluated": 672,
+          "feasible": true,
+          "scoreCents": 8173715
+        },
+        {
+          "generation": 7,
+          "evaluated": 768,
+          "feasible": true,
+          "scoreCents": 8173715
+        },
+        {
+          "generation": 8,
+          "evaluated": 864,
+          "feasible": true,
+          "scoreCents": 8449985
+        },
+        {
+          "generation": 9,
+          "evaluated": 960,
+          "feasible": true,
+          "scoreCents": 8449985
+        },
+        {
+          "generation": 10,
+          "evaluated": 1056,
+          "feasible": true,
+          "scoreCents": 8471535
+        },
+        {
+          "generation": 11,
+          "evaluated": 1152,
+          "feasible": true,
+          "scoreCents": 8471535
+        }
+      ]
+    }
+  ],
+  "exhaustive": {
+    "evaluations": 6912,
+    "simulations": 55296,
+    "feasibleCount": 1237,
+    "scope": "Exact best within this finite gene grid, these training worlds and this fixed objective only",
+    "genome": {
+      "cashReserveMonths": 1,
+      "channel": "partner",
+      "component": "rugged",
+      "depositPercent": 50,
+      "entryPriceCents": 360000,
+      "installationHours": 6,
+      "monthlyCents": 36000,
+      "payment": "service",
+      "support": "staffed"
+    },
+    "training": {
+      "feasible": true,
+      "scoreCents": 8614580,
+      "meanNetCashCents": 9767080,
+      "worstNetCashCents": 7462080,
+      "minimumCashCents": 57760,
+      "meanOrders": 80.375
+    },
+    "holdout": {
+      "feasible": true,
+      "scoreCents": 8325360,
+      "meanNetCashCents": 9611680,
+      "worstNetCashCents": 7039040,
+      "minimumCashCents": 232960,
+      "meanOrders": 78.33333333333333
+    },
+    "stress": [
+      {
+        "market": "stress-price-war",
+        "feasible": true,
+        "scoreCents": 2422400,
+        "meanNetCashCents": 2422400,
+        "worstNetCashCents": 2422400,
+        "minimumCashCents": 261360,
+        "meanOrders": 47
+      },
+      {
+        "market": "stress-supply",
+        "feasible": true,
+        "scoreCents": 453920,
+        "meanNetCashCents": 453920,
+        "worstNetCashCents": 453920,
+        "minimumCashCents": 79680,
+        "meanOrders": 49
+      },
+      {
+        "market": "stress-demand",
+        "feasible": true,
+        "scoreCents": -3641760,
+        "meanNetCashCents": -3641760,
+        "worstNetCashCents": -3641760,
+        "minimumCashCents": 358240,
+        "meanOrders": 18
+      },
+      {
+        "market": "stress-credit",
+        "feasible": false,
+        "scoreCents": -5652320,
+        "meanNetCashCents": -5652320,
+        "worstNetCashCents": -5652320,
+        "minimumCashCents": -3652320,
+        "meanOrders": 9
+      }
+    ]
+  }
+}

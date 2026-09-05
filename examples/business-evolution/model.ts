@@ -9,11 +9,12 @@ export const genomeSchema = s.object({
   depositPercent: s.number({ integer: true, min: 0, max: 100 }),
   installationHours: s.number({ integer: true, min: 1, max: 16 }),
   component: s.enum("standard", "rugged"), support: s.enum("lean", "staffed"),
+  cashReserveMonths: s.number({ integer: true, min: 0, max: 12 }),
 });
 export type Genome = Infer<typeof genomeSchema>;
 export const baselineGenome: Genome = genomeSchema.parse({ channel: "direct", payment: "purchase",
   entryPriceCents: 300_000, monthlyCents: 15_000, depositPercent: 50,
-  installationHours: 8, component: "standard", support: "staffed" });
+  installationHours: 8, component: "standard", support: "staffed", cashReserveMonths: 0 });
 
 export const marketSchema = s.object({
   id: s.string({ minLength: 1 }), seed: s.number({ integer: true, min: 0, max: 0xffff_ffff }),
@@ -31,12 +32,17 @@ export type Market = Infer<typeof marketSchema>;
 const baseMarket: Market = marketSchema.parse({ id: "synthetic", seed: 1, openingCashCents: 4_000_000,
   fixedMonthlyCents: 240_000, buyersPerMonth: 28, kitsPerMonth: 12, installerHoursPerMonth: 72,
   buyerLiquidity: 1, benefitMultiplier: 1, kitCostMultiplier: 1, paymentDelayMonths: 1, rivalPriceMultiplier: 1 });
-export const trainingMarkets: readonly Market[] = Object.freeze([101, 211, 307, 401, 503, 601]
+const initialTrainingMarkets: readonly Market[] = Object.freeze([101, 211, 307, 401, 503, 601]
   .map((seed, i) => marketSchema.parse({ ...baseMarket, id: `train-${seed}`, seed,
     buyerLiquidity: i % 2 === 0 ? 1 : 0.7, paymentDelayMonths: i % 3 === 0 ? 3 : 1,
     kitCostMultiplier: i >= 4 ? 1.2 : 1 })));
-export const holdoutMarkets: readonly Market[] = Object.freeze([701, 809, 907, 1009, 1103, 1201]
-  .map((seed, i) => marketSchema.parse({ ...trainingMarkets[i]!, id: `holdout-${seed}`, seed })));
+// v1 holdout is now development evidence, not an unseen evaluation set.
+export const diagnosticMarkets: readonly Market[] = Object.freeze([701, 809, 907, 1009, 1103, 1201]
+  .map((seed, i) => marketSchema.parse({ ...initialTrainingMarkets[i]!, id: `diagnostic-${seed}`, seed })));
+export const trainingMarkets: readonly Market[] = Object.freeze([...initialTrainingMarkets,
+  ...diagnosticMarkets.filter(market => market.seed === 1009 || market.seed === 1103)]);
+export const holdoutMarkets: readonly Market[] = Object.freeze([2003, 2111, 2203, 2309, 2411, 2503]
+  .map((seed, i) => marketSchema.parse({ ...initialTrainingMarkets[i]!, id: `final-holdout-${seed}`, seed })));
 export const stressMarkets: readonly Market[] = Object.freeze([
   marketSchema.parse({ ...baseMarket, id: "stress-price-war", seed: 1409, rivalPriceMultiplier: 0.65 }),
   marketSchema.parse({ ...baseMarket, id: "stress-supply", seed: 1511, kitsPerMonth: 10, installerHoursPerMonth: 66, kitCostMultiplier: 1.5 }),
@@ -179,7 +185,11 @@ export function simulateMarket(input: Genome, marketInput: Market, options: Simu
         const acquisitionCost = terms.channel === "direct" ? 40_000 : 12_000;
         const commission = terms.channel === "partner" ? Math.round(contract.depositCents * 0.12) : 0;
         // Future subscriptions and delayed final payments cannot finance today's delivery.
-        if (company.cash + contract.depositCents - commission < kitCost + installationCost + acquisitionCost) {
+        const active = company.cohorts.filter(cohort => cohort.active);
+        const staffed = terms.support === "staffed" || active.some(cohort => cohort.contract.terms.support === "staffed");
+        const nextMonthCommitment = market.fixedMonthlyCents + (staffed ? 80_000 : 0) + (active.length + 1) * 2_000;
+        const reserve = terms.cashReserveMonths * nextMonthCommitment;
+        if (company.cash + contract.depositCents - commission - reserve < kitCost + installationCost + acquisitionCost) {
           company.result.fundingRejected++; continue;
         }
         collect(company, contract, contract.depositCents);
