@@ -144,6 +144,8 @@ The [company-network demo](examples/company-network/README.md) connects this ker
 
 Run `bun install --frozen-lockfile` and `bun run demo:network` with Bun 1.4.2, then open `http://127.0.0.1:3117`. `bun run verify:network` exercises the actual SDK and process restart in an isolated directory. This is a localhost example with fictional funds and playable company roles; it does not authenticate real companies or implement distributed transactions. The [larger business specification](docs/business-model/README.md) describes assumptions beyond the implemented slice.
 
+`bun run scale:network` tests connected populations with shared stock, cash and installation hours: DNA at 1,000 / 3,000 / 10,000 companies, and actual WDK runs at 1,000 / 3,000 simultaneously parked companies. It uses isolated temporary runtime data and writes measurements to `reports/network-scale`. See the [scale experiment](docs/network-scale.md) for the measured scope and limits.
+
 ## Earlier examples
 
 The earlier [product thread](examples/product-thread.ts) and [product DNA](examples/product-dna.ts) explore shared facts across firmware configuration, application capabilities, engineering diagrams, documents and claims. They remain useful examples, not the template every domain must follow.

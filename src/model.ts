@@ -221,7 +221,7 @@ export class Scenario {
   }
   set<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): Scenario { return this.#write(node, assertion, false); }
   record<T>(node: Fact<T>, assertion: Assertion<NoInfer<T>>): Scenario { return this.#write(node, assertion, true); }
-  /** Validate many inputs with one records copy. The writer is synchronous and
+  /** Validate many inputs in one draft and one final snapshot. The writer is synchronous and
    * expires before the new immutable snapshot is returned. */
   batch(write: (draft: ScenarioWriter) => undefined): Scenario {
     const records = new Map(this.#records);
