@@ -12,7 +12,8 @@
     ".": "./src/index.ts",
     "./usb": "./src/domains/usb.ts",
     "./access": "./src/domains/access.ts",
-    "./commerce": "./src/domains/commerce.ts"
+    "./commerce": "./src/domains/commerce.ts",
+    "./cashflow": "./src/domains/cashflow.ts"
   },
   "bin": { "dna": "./src/cli.ts" },
   "scripts": {
