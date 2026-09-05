@@ -56,4 +56,6 @@ Source exports make this a Bun-first experimental repository dependency. `privat
 
 ## Changes worth experimenting with next
 
+The optional `examples/company-network` workspace tests an actual runtime boundary: pure DNA decisions → Workflow SDK steps → a single-process file-backed authority. Stable operation keys and authority receipts handle repeated effects; SDK history handles workflow progress. Durable execution does not make an external effect intrinsically idempotent. A serial/chip passport is a domain projection over synthetic identity and receipt references, not physical authentication. The UI IR and finite future-offer search stay in the example until broader use cases justify a public abstraction. Workflow is a dependency of the example workspace, not the kernel.
+
 Test demand for typed entity references, domain package compatibility, units/quantities, evidence validity intervals and immutable dataset ingestion before adding them. Maintain separate tests for source quality, physical/product constraints and commercial hypotheses. Any learned business rule should arrive as an explicit code change plus a counterexample test, never as an invisible mutation of the model.

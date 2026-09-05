@@ -138,6 +138,12 @@ Cross-domain testing found and fixed seven structural/diff defects: global ident
 
 The public wire shape has not been inflated to accommodate every case yet. Flattening a contextual permission or a live reservation into `status: "available"` would discard meaning. A registry built over that loss would amplify the mistake.
 
+## Executing a fictional company network
+
+The [company-network demo](examples/company-network/README.md) connects this kernel to Workflow SDK 4.8.5. Three company processes exchange signals, await acceptance and reconcile a repeated inventory operation against an authority receipt. A versioned UI IR feeds two shells and two themes; a synthetic device passport links components to actual simulated operation receipts. A separate constrained search compares seven future offers without changing the accepted agreement.
+
+Run `bun install --frozen-lockfile` and `bun run demo:network` with Bun 1.4.2, then open `http://127.0.0.1:3117`. `bun run verify:network` exercises the actual SDK and process restart in an isolated directory. This is a localhost example with fictional funds and playable company roles; it does not authenticate real companies or implement distributed transactions. The [larger business specification](docs/business-model/README.md) describes assumptions beyond the implemented slice.
+
 ## Earlier examples
 
 The earlier [product thread](examples/product-thread.ts) and [product DNA](examples/product-dna.ts) explore shared facts across firmware configuration, application capabilities, engineering diagrams, documents and claims. They remain useful examples, not the template every domain must follow.

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru" data-theme="dark" data-shell="network">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DNA · Живая сеть компаний</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="DNA — главная"
+        ><svg viewBox="0 0 30 36" aria-hidden="true">
+          <path
+            d="M5 3C5 13 25 23 25 33M25 3C25 13 5 23 5 33M7 7h16M10 13h10M10 23h10M7 29h16"
+          /></svg
+        ><b>dna</b><span class="brand-divider"></span
+        ><span class="brand-caption">BUSINESS LAB</span></a
+      >
+      <nav>
+        <span class="nav-current">Сеть компаний</span
+        ><a href="/.well-known/dna" target="_blank" rel="noopener"
+          >Discovery ↗</a
+        ><a href="/api/ui" target="_blank" rel="noopener">UI IR ↗</a>
+      </nav>
+      <div class="top-actions">
+        <span id="connection" class="live"><i></i>LOCAL RUNTIME</span
+        ><button
+          id="theme"
+          class="icon-button"
+          title="Сменить тему"
+          aria-label="Сменить светлую и тёмную тему"
+        >
+          ◐
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span></span> ИСПОЛНЯЕМАЯ МОДЕЛЬ БИЗНЕСА</div>
+          <h1>Договорённости становятся<br /><em>действиями.</em></h1>
+          <p>
+            Три компании. Общая сделка. Каждый шаг — с основанием,<br
+              class="desktop"
+            />
+            полномочием и памятью о том, что уже произошло.
+          </p>
+        </div>
+        <div class="hero-aside">
+          <span class="code-tag">"use workflow"</span>
+          <p>DNA определяет условия.<br />Workflow сохраняет продвижение.</p>
+          <div class="hero-stats">
+            <span><b>03</b> компании</span
+            ><span><b id="run-count">00</b> процесса</span
+            ><span><b id="receipt-count">00</b> подтверждений</span>
+          </div>
+        </div>
+      </section>
+      <section class="controlbar" aria-label="Управление сценарием">
+        <div class="scenario-control">
+          <span class="micro">СЦЕНАРИЙ</span
+          ><select id="scenario" aria-label="Выберите сценарий">
+            <option value="baseline">Поставка с потерянным ответом</option>
+            <option value="capacity">Не хватает монтажных часов</option>
+            <option value="missing-deposit">Ожидание аванса</option>
+          </select>
+        </div>
+        <button id="start" class="primary">
+          Запустить сделку <span>↗</span></button
+        ><label class="fault-toggle"
+          ><input id="fault" type="checkbox" checked /><span></span> Потерять
+          ответ после резерва</label
+        >
+        <div class="control-spacer"></div>
+        <button
+          id="restart"
+          class="secondary"
+          title="Остановить и перезапустить реальный серверный процесс"
+        >
+          ↻ Перезапустить runtime
+        </button>
+      </section>
+      <section class="workbench">
+        <div class="canvas-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="micro">ПРОСТРАНСТВО ВЗАИМОДЕЙСТВИЙ</span
+              ><span class="legend"
+                ><i></i> подтверждено <i></i> ожидание <i></i> ограничение</span
+              >
+            </div>
+            <div class="segmented" aria-label="Оболочка интерфейса">
+              <button data-shell="network" class="selected">Сеть</button
+              ><button data-shell="workspace">Рабочее место</button>
+            </div>
+          </div>
+          <div
+            id="canvas"
+            class="network-canvas"
+            aria-label="Субъекты и связи бизнеса"
+          ></div>
+          <div id="actions" class="action-dock"></div>
+          <div class="canvas-footer">
+            <span id="ir-label">Один UI IR · сменные оболочки и темы</span
+            ><span id="session-label">Сделка ещё не запущена</span>
+          </div>
+        </div>
+        <aside class="inspector">
+          <div class="inspector-heading">
+            <span class="micro">ИНСПЕКТОР МОДЕЛИ</span
+            ><span class="small-dot"></span>
+          </div>
+          <div class="inspector-tabs">
+            <button data-tab="decisions" class="selected">Решения</button
+            ><button data-tab="passport">Изделие</button
+            ><button data-tab="evolution">Эволюция</button>
+          </div>
+          <div id="inspector-content"></div>
+        </aside>
+      </section>
+      <section class="bottom-grid">
+        <div class="ledger-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="micro">ЦИФРОВОЙ СЛЕД</span>
+              <h2>История, которая сохраняется</h2>
+            </div>
+            <span id="ledger-count" class="pill">0 событий</span>
+          </div>
+          <div id="ledger" class="ledger">
+            <p class="muted empty-ledger">
+              Запустите сделку — здесь появятся реальные события локального
+              runtime.
+            </p>
+          </div>
+        </div>
+        <div class="contract-panel">
+          <span class="micro">ЗАФИКСИРОВАННЫЕ УСЛОВИЯ</span>
+          <div class="contract-title">
+            <h2>Устройство + ПО<br />+ внедрение</h2>
+            <span class="contract-symbol">↗</span>
+          </div>
+          <div class="contract-total">
+            <b id="contract-total">4 800</b><span>EUR / первый год</span>
+          </div>
+          <div class="contract-lines">
+            <div><span>Устройство и внедрение</span><b>3 000 EUR</b></div>
+            <div><span>Программное обеспечение</span><b>150 EUR / мес.</b></div>
+            <div><span>Аванс</span><b>1 500 EUR</b></div>
+          </div>
+          <p class="contract-note">
+            Отзыв создаёт предложение для будущей версии. Принятые условия этого
+            договора сохраняются.
+          </p>
+          <div id="feedback-result"></div>
+        </div>
+      </section>
+      <footer>
+        <span><b>DNA</b> × Workflow SDK 4.8.5</span
+        ><span
+          >Вымышленные компании · локальные роли · синтетические сценарии</span
+        ><span id="instance">Процесс: подключение…</span>
+      </footer>
+    </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

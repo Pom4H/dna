@@ -1,0 +1,9 @@
+{
+  "name": "@dna/company-network-demo",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.2",
+  "engines": { "bun": "1.4.2" },
+  "scripts": { "build": "workflow build", "start": "bun run.ts" },
+  "dependencies": { "workflow": "4.8.5" }
+}

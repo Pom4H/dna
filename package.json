@@ -8,6 +8,7 @@
   "repository": { "type": "git", "url": "https://github.com/Pom4H/dna.git" },
   "packageManager": "bun@1.4.2",
   "engines": { "bun": "1.4.2" },
+  "workspaces": ["examples/company-network"],
   "exports": {
     ".": "./src/index.ts",
     "./usb": "./src/domains/usb.ts",
@@ -22,6 +23,9 @@
     "test:coverage": "bun test --coverage",
     "build": "tsc -p tsconfig.build.json",
     "demo": "bun examples/demo.ts",
+    "demo:network": "bun run --cwd examples/company-network build && bun run --cwd examples/company-network start",
+    "test:network": "bun test tests/company-network-*.test.ts",
+    "verify:network": "bun run --cwd examples/company-network build && bun scripts/company-network-e2e.ts",
     "domains": "bun scripts/stress-domains.ts",
     "finance": "bun scripts/stress-finance.ts",
     "test:finance": "bun test tests/finance-strategy.test.ts",

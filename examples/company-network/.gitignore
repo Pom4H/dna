@@ -1,0 +1,6 @@
+.well-known/
+.workflow-data/
+.demo-data/
+node_modules/
+*.log
+/.swc
