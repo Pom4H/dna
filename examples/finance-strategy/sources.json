@@ -1,0 +1,13 @@
+{
+  "treasury": { "currency": "USD", "openingCashCents": 200000, "expenses": [{ "id": "period-overhead", "day": 30, "amountCents": 300000 }] },
+  "capacityHours": 120,
+  "loans": [],
+  "accepted": [
+    { "id": "legacy", "customer": "customer-old", "segment": "custom", "feeCents": 200000, "directCostCents": 80000, "hours": 20, "depositBps": 0, "startDay": 0, "costDay": 1, "completionDay": 10, "remainderDay": 10 }
+  ],
+  "opportunities": [
+    { "id": "repeat-a", "customer": "customer-a", "segment": "repeatable", "feeCents": 300000, "directCostCents": 100000, "hours": 30, "depositBps": 5000, "startDay": 1, "costDay": 5, "completionDay": 30, "remainderDay": 60 },
+    { "id": "repeat-b", "customer": "customer-b", "segment": "repeatable", "feeCents": 300000, "directCostCents": 100000, "hours": 30, "depositBps": 5000, "startDay": 1, "costDay": 5, "completionDay": 30, "remainderDay": 60 },
+    { "id": "enterprise", "customer": "customer-big", "segment": "custom", "feeCents": 1000000, "directCostCents": 700000, "hours": 100, "depositBps": 0, "startDay": 1, "costDay": 5, "completionDay": 30, "remainderDay": 90 }
+  ]
+}

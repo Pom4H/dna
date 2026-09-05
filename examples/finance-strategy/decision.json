@@ -1,0 +1,7 @@
+{
+  "choice": { "segment": "repeatable", "rankBy": "contribution", "reserveHours": 20 },
+  "policy": { "minContributionBps": 4000, "minDepositBps": 5000, "minCashCents": 100000, "maxCustomerShareBps": 7000 },
+  "targetProfitCents": 200000,
+  "horizonDay": 90,
+  "paymentDelayDays": 0
+}
