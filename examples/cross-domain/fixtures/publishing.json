@@ -1,0 +1,5 @@
+{
+  "asset": { "uri": "https://media.example.invalid/campaign.jpg", "revision": "asset-v3" },
+  "grant": { "assetRevision": "asset-v3", "markets": ["NL"], "channels": ["web"], "startsAt": 1000, "endsAt": 2000, "revoked": false },
+  "context": { "market": "NL", "now": 1500 }
+}

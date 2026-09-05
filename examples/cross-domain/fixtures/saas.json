@@ -1,0 +1,5 @@
+{
+  "offer": { "monthlyCents": 3900, "seats": 5 },
+  "agreement": { "monthlyCents": 2900, "seats": 10, "tenant": "tenant.example", "active": true },
+  "request": { "tenant": "tenant.example", "role": "owner", "occupiedSeats": 8, "privateEmail": "private-person@example.invalid" }
+}

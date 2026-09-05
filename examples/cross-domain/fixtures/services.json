@@ -1,0 +1,5 @@
+{
+  "offer": { "deliverables": ["Review", "Workshop"], "feeCents": 180000 },
+  "engagement": { "deliverables": ["Review"], "feeCents": 120000, "requiredHours": 12, "inputsReady": true, "milestoneAccepted": false },
+  "freeHours": 16
+}

@@ -1,0 +1,6 @@
+{
+  "slot": { "title": "Example writing workshop", "priceCents": 5000 },
+  "inventory": { "version": 7, "remaining": 1, "capturedAt": 1000, "expiresAt": 1100 },
+  "request": { "quantity": 1, "now": 1050 },
+  "booking": { "confirmed": false, "agreedCents": 4500, "reference": "synthetic-request-1" }
+}
