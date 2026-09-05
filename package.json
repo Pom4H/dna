@@ -27,6 +27,7 @@
     "test:network": "bun test tests/company-network-*.test.ts",
     "verify:network": "bun run --cwd examples/company-network build && bun scripts/company-network-e2e.ts",
     "scale:network": "bun run --cwd examples/company-network build && bun scripts/stress-network.ts all",
+    "evolve:business": "bun scripts/evolve-business.ts",
     "domains": "bun scripts/stress-domains.ts",
     "finance": "bun scripts/stress-finance.ts",
     "test:finance": "bun test tests/finance-strategy.test.ts",
